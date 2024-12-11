@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Piedra, papel o tijera</title>
+        <style>
+            /* Estilo para la ventana de alerta personalizada */
+            .alert {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                padding: 20px;
+                background-color: #fff;
+                border: 2px solid #000;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                display: none;
+                width: 75%;
+                max-width: 400px;
+            }
+            .alert img {
+                max-width: 75%;
+                height: auto;
+            }
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Piedra, papel o tijera</h1>
+        <!-- Contenedor para la ventana de alerta personalizada -->
+        <div id="overlay" class="overlay" onclick="closeAlert()"></div>
+        <div id="alert-box" class="alert">
+            <span id="alert-message"></span>
+            <br>
+            <img id="alert-image" alt="Alert Image">
+            <br>
+            <button onclick="closeAlert()">Cerrar</button>
+        </div>
+
+        <script>
+            // Función para mostrar la alerta personalizada
+            function showAlert(message, imageUrl) {
+                document.getElementById('alert-message').innerHTML = message;
+                document.getElementById('alert-image').src = imageUrl;
+                document.getElementById('alert-box').style.display = 'block';
+                document.getElementById('overlay').style.display = 'block';
+            }
+
+            // Función para cerrar la alerta personalizada
+            function closeAlert() {
+                document.getElementById('alert-box').style.display = 'none';
+                document.getElementById('overlay').style.display = 'none';
+            }
+
+            // 1 es piedra, 2 es papel, 3 es tijera
+            let jugador = 0;
+            let pc = 2;
+            jugador = prompt("Elije:\n 1 para 🪨\n 2 para 📄\n 3 para ✂️");
+
+            // Mostrar elección del jugador
+            if (jugador == 1) {
+                alert("Elejiste 🪨");
+            } else if (jugador == 2) {
+                alert("Elejiste 📄");
+            } else if (jugador == 3) {
+                alert("Elejiste ✂️");
+            } else {
+                alert("ELEJISTE PERDER 👾 ");
+            }
+
+            // Selección aleatoria para la PC
+            pc = Math.floor(Math.random() * 3) + 1;
+
+            // Mostrar elección de la PC
+            if (pc == 1) {
+                alert("Elije PC 🪨");
+            } else if (pc == 2) {
+                alert("Elije PC 📄");
+            } else if (pc == 3) {
+                alert("Elije PC ✂️");
+            } else {
+                alert("ELEJISTE PERDER 👾 ");
+            }
+
+            // Chequear el resultado del juego
+            if (jugador == pc) {
+                showAlert("¡Empate!", "empate.png");
+            } else if (
+                (jugador == 1 && pc == 3) || 
+                (jugador == 2 && pc == 1) || 
+                (jugador == 3 && pc == 2)
+            ) {
+                showAlert("¡Ganaste!", "ganador.png");  // Asegúrate de tener una imagen llamada 'ganador.png'
+            } else {
+                showAlert("¡Perdiste!", "perdedor.png");  // Asegúrate de tener una imagen llamada 'perdedor.png'
+            }
+        </script>
+    </body>
+</html>
